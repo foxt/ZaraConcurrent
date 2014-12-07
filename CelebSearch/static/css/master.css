@@ -1,0 +1,102 @@
+    body{
+
+  		}
+  		h1 {
+  			color: black;
+  		}
+      li{
+        border: 1px solid black;
+      }
+      #pie_chart_container{
+        background-color:#1B1B1B;
+        height:500px;
+        margin-top:50px;
+      }
+      #logo{
+        margin-left: 100px;
+        float:left;
+      }
+      #logo2{
+        position: absolute;
+        top:87px;
+        left:115px;
+      }
+      #form1{
+        float:right;
+        margin-right:120px;
+        margin-top:14px;
+      }
+      #pie_title{
+        position: absolute;
+        left:450px;
+      }
+      #piechart{
+        width: 400px; 
+        height: 500px;
+        position:absolute;
+        top:200px;
+        left:100px;
+      }
+      #piechart2{
+        width: 400px; 
+        height: 500px;
+        position:absolute;
+        top:200px;
+        left:850px;
+        
+      }
+      #aggregate_description{
+        position:absolute;
+        top:550px;
+        left:400px;
+      }
+      #submit_button{
+        background-color:transparent;
+        position:absolute;
+        top:87px;
+        left:114px;
+        height:60px;
+        width:62px;
+        cursor:pointer;
+        border:none;
+      }
+  		#centered_div{ 
+  			width: 500px;
+  			height: 200px;
+  			position: absolute;
+  			top: 50%;
+  			left: 50%;
+  			margin-left: -250px;
+  			margin-top: -150px;
+  			background-color: white;
+  			border: 1px solid white;
+  			border-radius: 25px;
+  		}
+      #map_container{
+        background-color:#000000;
+        height:500px;
+        border-top:5px solid #858585;
+      }
+      #tweet_map_title{
+        position: absolute;
+        margin-top:20px;
+        left:500px;
+        top:700px;
+      }
+      #map_canvas{
+        position: absolute;
+        left: 320px;
+        top: 800px;
+      }
+      #tcdiv{
+        height:200px;
+        width:200px;
+        border:1px solid red;
+        
+      }
+      #tcdiv2{
+        height:200px;
+        width:200px;
+        border:1px solid green;
+
+      }

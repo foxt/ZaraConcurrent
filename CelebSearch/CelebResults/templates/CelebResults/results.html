@@ -1,0 +1,219 @@
+<html>
+<head>
+    <title>Tweets</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"/>
+    <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
+
+    <script>
+    	var tweet_data = [];
+    	var tweet_subjectivity = [];
+		var positive = 0;
+		var negative = 0;
+		var neutral = 0;
+		var fact = 0;
+		var opinion = 0;
+		var neither = 0;
+		{% for a,b in scores %}
+			tweet_data.push({{a}});
+			tweet_subjectivity.push({{b}});
+		{% endfor %}
+		for(var i = 0; i < tweet_data.length; i++){
+			if( tweet_data[i] > 0.0){
+				positive +=1;
+			} else if (tweet_data[i]< 0.0){
+				negative +=1;
+			} else {
+				neutral += 1;
+			}
+			
+		}
+		for(var i = 0; i < tweet_subjectivity.length; i++){
+			if(tweet_subjectivity[i] < 0.5){
+				fact += 1;
+			} else if (tweet_subjectivity[i] >= 0.5){
+				opinion += 1;
+			} else {
+				
+			}
+		}
+		
+	</script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Positive',     positive],
+          ['Negative',      negative],
+          ['Neutral',  neutral],
+        ]);
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Opinion',     opinion],
+          ['Fact',      fact],
+          ['Neither',  neither],
+        ]);
+
+        var options = {
+          title: 'Aggregate Sentiment',
+          titleTextStyle:{
+          	color: 'white'
+          },
+          backgroundColor: 'transparent',
+          legend:{textStyle: {
+          	color: 'white',
+          	fontName: 'Arial',
+          	fontSize: '12'
+          }},
+          slices:{
+          	0: {color: 'black'},
+          	1: {color: 'gray'},
+          	2: {color: '#838F9B'}
+          }
+      };
+
+        var options2 = {
+          title: 'Tweet Subjectivity',
+          titleTextStyle:{
+          	color: 'white'
+          },
+          backgroundColor: 'transparent',
+          legend:{textStyle: {
+          	color: 'white',
+          	fontName: 'Arial',
+          	fontSize: '12'
+          }},
+          slices:{
+          	0: {color: 'black'},
+          	1: {color: 'gray'},
+          	2: {color: '#838F9B'}
+          }
+
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+        chart2.draw(data2,options2);
+      }
+    </script>
+    <script type='text/javascript'>
+   google.load('visualization', '1', {'packages': ['geomap']});
+   google.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Country', 'Tweet Sentiment'],
+        ['Japan', 1],
+        ['United States', 1],
+        ['Brazil', -1],
+        ['Canada', 0],
+        ['Indonesia', -1],
+      ]);
+
+      var options = {};
+      options['colors'] = [0x838F9B,0xc0c0c0,0x000000];
+      options['height'] = '347px';
+      options['width']  = '700px';
+      var container = document.getElementById('map_canvas');
+      var geomap = new google.visualization.GeoMap(container);
+      geomap.draw(data, options);
+  };
+  </script>
+
+</head>
+<body>
+	<div id="banner">
+		<img id="zara_banner" src="{{STATIC_URL}}img/banner.png"></img>
+	</div>
+	<div id="pie_chart_container">
+		<img id="pie_title" src="{{STATIC_URL}}img/pie_title.png"></img>
+<<<<<<< HEAD
+    	<div id="piechart" ></div>
+    	<div id="piechart2"></div>
+    	<img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
+    </div>
+    <!--<ol>
+    {% for tweet in tweets %}
+      <li>{{tweet.date}}</li>
+    {% endfor %}
+    </ol>-->
+=======
+  	<div id="piechart" ></div>
+  	<div id="piechart2"></div>
+    <img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
+  </div>
+  <div id="map_container">
+    <img id="tweet_map_title" src="{{STATIC_URL}}img/map.PNG"></img>
+    <div id='map_canvas'></div>
+  </div>
+>>>>>>> d9cfe6b24a5979d57fdf342fadad0f3150ad2543
+   <!-- <div id="tcdiv"></div>
+    <div id="tcdiv2"></div> -->
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	  //figure out which tweets are positive and which are negative
+	/*  var tweet_array = [];
+	  var positive_tweet = [];
+	  var negative_tweet = [];
+	  var array_test = [];
+	  {% for tweet in tweets %}
+	  		try{
+			var str = "{{tweet.text}}";
+			
+			tweet_array.push(str);
+		} catch(err){
+			alert("failed");
+		}
+	  {% endfor %}
+	  for(var i = 0; i < tweet_data.length; i++ ){
+	  	if(tweet_data[i] > 0.0){
+	  		positive_tweet.push(tweet_array[i]);
+	  	} else if (tweet_data[i] < 0.0){
+	  		negative_tweet.push(tweet_array[i]);
+	  	}
+	  }
+      google.load("visualization", "1");
+      google.setOnLoadCallback(draw);
+      function draw() {
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Label');
+        data.addRows(positive_tweet.length);
+        for(var twe = 0; twe < positive_tweet.length; twe++){
+        	data.setValue(twe,0,poitive_tweet[twe]);
+        	}
+        data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Label');
+        data2.addRows(negative_tweet.length);
+        for(var twe = 0; twe < negative_tweet.length; twe++){
+        	data2.setValue(twe,0,negative_tweet[twe]);
+        	}
+        var outputDiv = document.getElementById('tcdiv');
+        var tc = new WordCloud(outputDiv);
+        tc.draw(data, null);
+        var outputDiv2 = document.getElementById('tcdiv2');
+        var tc2 = new WordCloud(outputDiv2);
+        tc2.draw(data2, null);
+    }*/
+    </script>
+</html>
