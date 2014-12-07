@@ -1,0 +1,7 @@
+Installs:
+pip install django
+pip install pattern
+pip install pymongo
+
+Description:
+A web app that searchs for tweets based on an entered name, performs sentiment analysis on them, then displays the results in interesting ways. 
