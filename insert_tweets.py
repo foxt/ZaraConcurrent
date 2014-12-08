@@ -42,7 +42,9 @@ class listener(StreamListener):
                             "date": date,
                             "coordinates": tweet_coord
                             }
-                #this_tweet_id = collection.insert(my_tweet)
+                my_tweet["text"]=tweet["text"].encode('ascii','ignore')
+                my_tweet["text"]=tweet["text"].replace('"','')
+                this_tweet_id = collection.insert(my_tweet)
                 if tweet_coord != None:
                     print my_tweet
             else:
