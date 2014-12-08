@@ -28,6 +28,12 @@ class Clips_Adaptor(models.Model):
             scores.append(score)
         return scores
 
+    def get_sentiment_concur(self, tweet):
+        '''
+        Perform sentiment analysis on a single tweet
+        '''
+        return str(sentiment(tweet["text"]))
+
 
 
 class Mongo_Service(models.Model):

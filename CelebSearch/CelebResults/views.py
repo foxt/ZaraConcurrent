@@ -1,8 +1,11 @@
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.shortcuts import render_to_response
+from multiprocessing import Pool
+#from multiprocessing import ThreadPool
 
 from CelebResults.models import Clips_Adaptor, Mongo_Service
+
 
 def index(request):
     '''
@@ -12,12 +15,17 @@ def index(request):
         })
     return render_to_response('CelebResults/index.html', context)
 
+def get_sentiment_concur(tweet):
+    clips = Clips_Adaptor()
+    return clips.get_sentiment_concur(tweet)
+    #return 3
+
 def results(request):
     '''
     Renders the results page
     '''
     if request.method == "GET":
-        clips = Clips_Adaptor()
+        #clips = Clips_Adaptor()
         mongodb = Mongo_Service()
         name = request.GET.__getitem__("artistname")
 
@@ -47,7 +55,30 @@ def results(request):
 
         print coords
         ## Score the tweets with sentiment analysis
-        scores = clips.get_sentiment(tweets)
+        pool = ThreadPool(processes=2)
+        scores = pool.map(get_sentiment_concur, tweets)
+        pool.close()
+        print "SUP",scores
         context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
         return render_to_response('CelebResults/results.html', context)
 
+
+        '''
+        ## Non-concurrent version !!!!!!!REMOVE!!!!!!!!
+        coords = []
+        for tweet in tweets:
+            tweet["text"]=tweet["text"].encode('ascii','ignore')
+            tweet["text"]=tweet["text"].replace('"','')
+            try:
+                curr_coords = tweet["coordinates"]
+                if curr_coords["type"] == 'Point':
+                    coords.append(curr_coords["coordinates"])
+            except:
+                coords.append([-200,-200])
+
+        print coords
+        ## Score the tweets with sentiment analysis
+        scores = clips.get_sentiment(tweets)
+        context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
+        return render_to_response('CelebResults/results.html', context)
+        '''
