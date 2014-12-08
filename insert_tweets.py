@@ -1,5 +1,5 @@
 #!/usr/bin/python
-'''
+
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
@@ -94,3 +94,4 @@ for item in common_filter:
                         }
             this_tweet_id = collection.insert(my_tweet)
             #print my_tweet
+'''
