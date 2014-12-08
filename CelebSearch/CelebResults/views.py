@@ -55,7 +55,7 @@ def results(request):
 
         print coords
         ## Score the tweets with sentiment analysis
-        pool = ThreadPool(processes=2)
+        pool = Pool(processes=2)
         scores = pool.map(get_sentiment_concur, tweets)
         pool.close()
         print "SUP",scores
