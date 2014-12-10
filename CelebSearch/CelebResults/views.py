@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.shortcuts import render_to_response
 from multiprocessing import Pool
-#from multiprocessing import ThreadPool
 
 from CelebResults.models import Clips_Adaptor, Mongo_Service
 
@@ -24,7 +23,7 @@ def results(request):
     Renders the results page
     '''
     if request.method == "GET":
-        #clips = Clips_Adaptor()
+        clips = Clips_Adaptor()
         mongodb = Mongo_Service()
         name = request.GET.__getitem__("artistname")
 
@@ -38,11 +37,18 @@ def results(request):
         tweets = mongodb.search_tweets(name)
 
         ## If none found, search twitter
+        convert = False
         if len(tweets) == 0:
             tweets = clips.search_tweets(name)
+            convert = True
 
         coords = []
-        for tweet in tweets:
+        for index, tweet in enumerate(tweets):
+            ## if the tweets came directly from clips, convert the unicode 
+            ## to a dictionary
+            if (convert):
+                tweets[index] = {'text': tweet['text']}
+
             tweet["text"]=tweet["text"].encode('ascii','ignore')
             tweet["text"]=tweet["text"].replace('"','')
             try:
@@ -52,21 +58,16 @@ def results(request):
             except:
                 coords.append([-200,-200])
                 
-        #'''
         ## Score the tweets with sentiment analysis
         pool = Pool(processes=2)
         scores = pool.map(get_sentiment_concur, tweets)
         pool.close()
-        print scores
-        context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
-        #return render_to_response('CelebResults/results.html', context)
-        #'''
+        ## Convert the scores from strings to tuples
+        for index, score in enumerate(scores):
+            score = score.split(',')
+            scores[index] = (score[0],score[1])
 
-        ## Score the tweets with sentiment analysis
-        clips = Clips_Adaptor()
-        my_scores = clips.get_sentiment(tweets)
-        print my_scores
-        #context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
+        context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
         return render_to_response('CelebResults/results.html', context)
         
-        
+

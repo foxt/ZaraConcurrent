@@ -30,10 +30,11 @@ class Clips_Adaptor(models.Model):
 
     def get_sentiment_concur(self, tweet):
         '''
-        Perform sentiment analysis on a single tweet
+        Perform sentiment analysis on a single tweet. Return the scores
+        in a comma seperated string (necessary for a process pool)
         '''
         score = sentiment(tweet["text"])
-        return str(score)
+        return "{0},{1}".format(score[0],score[1])
 
 
 class Mongo_Service(models.Model):
@@ -56,12 +57,6 @@ class Mongo_Service(models.Model):
         result = []
         for tweet in self.collection.find({"text": {"$regex": celeb, "$options": "-i"}},{"text": 1, "date": 1, "coordinates": 1, "_id": 0}):
             result.append(tweet)
-            '''
-            try:
-                print tweet["coordinates"]
-            except:
-                pass
-            '''
         return result
 
 
