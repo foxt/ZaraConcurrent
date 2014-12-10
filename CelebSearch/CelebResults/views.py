@@ -18,7 +18,6 @@ def index(request):
 def get_sentiment_concur(tweet):
     clips = Clips_Adaptor()
     return clips.get_sentiment_concur(tweet)
-    #return 3
 
 def results(request):
     '''
@@ -52,32 +51,22 @@ def results(request):
                     coords.append(curr_coords["coordinates"])
             except:
                 coords.append([-200,-200])
-
+                
+        #'''
         ## Score the tweets with sentiment analysis
         pool = Pool(processes=2)
         scores = pool.map(get_sentiment_concur, tweets)
         pool.close()
-        print "SUP",scores
+        print scores
         context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
-        return render_to_response('CelebResults/results.html', context)
+        #return render_to_response('CelebResults/results.html', context)
+        #'''
 
-
-        '''
-        ## Non-concurrent version !!!!!!!REMOVE!!!!!!!!
-        coords = []
-        for tweet in tweets:
-            tweet["text"]=tweet["text"].encode('ascii','ignore')
-            tweet["text"]=tweet["text"].replace('"','')
-            try:
-                curr_coords = tweet["coordinates"]
-                if curr_coords["type"] == 'Point':
-                    coords.append(curr_coords["coordinates"])
-            except:
-                coords.append([-200,-200])
-
-        print coords
         ## Score the tweets with sentiment analysis
-        scores = clips.get_sentiment(tweets)
-        context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
+        clips = Clips_Adaptor()
+        my_scores = clips.get_sentiment(tweets)
+        print my_scores
+        #context = RequestContext(request, {'tweets':tweets, 'scores': scores, 'coordinates': coords})
         return render_to_response('CelebResults/results.html', context)
-        '''
+        
+        

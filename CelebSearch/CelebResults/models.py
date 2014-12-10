@@ -32,8 +32,8 @@ class Clips_Adaptor(models.Model):
         '''
         Perform sentiment analysis on a single tweet
         '''
-        return str(sentiment(tweet["text"]))
-
+        score = sentiment(tweet["text"])
+        return str(score)
 
 
 class Mongo_Service(models.Model):
