@@ -53,7 +53,6 @@ def results(request):
             except:
                 coords.append([-200,-200])
 
-        print coords
         ## Score the tweets with sentiment analysis
         pool = Pool(processes=2)
         scores = pool.map(get_sentiment_concur, tweets)

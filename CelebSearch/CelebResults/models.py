@@ -56,10 +56,12 @@ class Mongo_Service(models.Model):
         result = []
         for tweet in self.collection.find({"text": {"$regex": celeb, "$options": "-i"}},{"text": 1, "date": 1, "coordinates": 1, "_id": 0}):
             result.append(tweet)
+            '''
             try:
                 print tweet["coordinates"]
             except:
                 pass
+            '''
         return result
 
 
