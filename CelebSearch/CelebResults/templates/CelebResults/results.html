@@ -104,16 +104,14 @@
     <script type='text/javascript'>
    google.load('visualization', '1', {'packages': ['geomap']});
    google.setOnLoadCallback(drawMap);
-
+   var countries = [['Country', 'Tweet Locations'],['dummy',0]];
+   {% for a,b in country_list %}
+       countries.push(['{{a}}', {{b}}]);
+   {% endfor %}
     function drawMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['Country', 'Tweet Sentiment'],
-        ['Japan', 1],
-        ['United States', 1],
-        ['Brazil', -1],
-        ['Canada', 0],
-        ['Indonesia', -1],
-      ]);
+      var data = google.visualization.arrayToDataTable(
+        countries
+      );
 
       var options = {};
       options['colors'] = [0x838F9B,0xc0c0c0,0x000000];
@@ -132,7 +130,7 @@
 	</div>
 	<div id="pie_chart_container">
 		<img id="pie_title" src="{{STATIC_URL}}img/pie_title.png"></img>
-<<<<<<< HEAD
+
     	<div id="piechart" ></div>
     	<div id="piechart2"></div>
     	<img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
@@ -142,6 +140,11 @@
       <li>{{tweet.text}}</li>
     {% endfor %}
     </ol>
+    <ol>
+   {% for a,b in country_list %}
+       <li>[{{a}}, {{b}}]</li>
+   {% endfor %}
+   </ol>
 =======
   	<div id="piechart" ></div>
   	<div id="piechart2"></div>
@@ -151,7 +154,7 @@
     <img id="tweet_map_title" src="{{STATIC_URL}}img/map.PNG"></img>
     <div id='map_canvas'></div>
   </div>
->>>>>>> d9cfe6b24a5979d57fdf342fadad0f3150ad2543
+
    <!-- <div id="tcdiv"></div>
     <div id="tcdiv2"></div> -->
 </body>
