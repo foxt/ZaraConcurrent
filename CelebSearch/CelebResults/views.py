@@ -59,7 +59,7 @@ def results(request):
                 coords.append([-200,-200])
                 
         ## Score the tweets with sentiment analysis
-        pool = Pool(processes=2)
+        pool = Pool(processes=5)
         scores = pool.map(get_sentiment_concur, tweets)
         pool.close()
         ## Convert the scores from strings to tuples

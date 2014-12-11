@@ -26,7 +26,6 @@ class listener(StreamListener):
         try:
             tweet = json.loads(data)
             tweet_id = tweet["id"]
-            print tweet["id"], tweet["coordinates"]
             if tweet["lang"] != "en":
                 pass
             if collection.find({"tweet_id": tweet_id}).limit(1).count() == 0:
@@ -35,8 +34,6 @@ class listener(StreamListener):
                 today = datetime.date.today()
                 date = datetime.datetime.strptime(str(today), '%Y-%m-%d')
                 tweet_coord = tweet["coordinates"]
-                if tweet_coord != None:
-                    print "position: ",tweet_coord["type"]
                 my_tweet = {"tweet_id": tweet_id,
                             "text": text,
                             "date": date,
