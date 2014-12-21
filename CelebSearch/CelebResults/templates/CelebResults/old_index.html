@@ -1,0 +1,146 @@
+<html>
+<head>
+    <title>Tweets</title>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
+</head>
+<style>
+.site_background{
+	padding-right:15px;
+ 	padding-left:15px;
+ 	margin-right:auto;
+ 	margin-left:auto;
+ 	background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+ 	background-size:cover;
+ 	min-height:600px;
+ 	-webkit-animation: bgImage 25s 1s infinite alternate;
+        -moz-animation: bgImage 25s 1s infinite alternate;
+        -ms-animation: bgImage 25s 1s infinite alternate;
+        -o-animation: bgImage 25s 1s infinite alternate;
+        animation: bgImage 25s 1s infinite alternate;
+}
+@-webkit-keyframes bgImage {
+  	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+  }
+@-moz-keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+}
+@-ms-keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+}
+@-o-keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+}
+@keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+}
+</style>
+<body>
+    <section class="site_background">
+	<div id="centered_div">
+		<img id="logo" src="{{STATIC_URL}}img/logo.png"></img>
+		<div>
+			<img id="logo2" src="{{STATIC_URL}}img/button.png"></img>
+    		<form id="form1" action="/results/" method="get">
+    		<input type="text" placeholder="Search Artist" name="artistname">
+    		<input id="submit_button" type="submit" value=""></input>
+    	</form> 
+    	</div>
+        </div>
+    </section>
+</body>
+</html>

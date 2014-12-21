@@ -1,18 +1,262 @@
-<html>
+<!DOCTYPE html>
 <head>
-    <title>Tweets</title>
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
+    <title>Zara For Days</title>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css"></link> 
+    <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width">
 </head>
-<body background="{{STATIC_URL}}img/zara_background.png">
-	<div id="centered_div">
-		<img id="logo" src="{{STATIC_URL}}img/logo.png"></img>
-		<div>
-			<img id="logo2" src="{{STATIC_URL}}img/button.png"></img>
-    		<form id="form1" action="/results/" method="get">
-    		<input type="text" placeholder="Search Artist" name="artistname">
-    		<input id="submit_button" type="submit" value=""></input>
-    	</form> 
-    	</div>
-    </div>
+<style>
+body{
+	/*background-image: url('zara_bg.jpg');
+	background-size: cover;*/
+}
+::-webkit-input-placeholder {
+   color: rgba(252,184,3,0.6);
+   font-size:50px;
+   height:80px;
+}
+input::-webkit-input-placeholder:after /* Only for Chrome */
+{
+   color:red;
+   content:"_";
+   opacity: 1;
+   -webkit-animation: blinker 2s linear infinite;
+
+   -moz-animation-name: blinker;
+   -moz-animation-duration: 1s;
+   -moz-animation-timing-function: linear;
+   -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+#zara_header{
+	font-family: 'Audiowide', cursive;
+	text-align: center;
+}
+/*
+#zara_header span:nth-child(1){
+	color:rgba(222,22,16,0.6);
+}
+
+#zara_header span:nth-child(2){
+	color:rgba(20,100,200,0.6);
+}
+
+#zara_header span:nth-child(3){
+	color:rgba(252,184,3,0.6);
+}*/
+#container{
+	margin-top:80px;
+	margin-left: auto;
+	margin-right:auto;
+	background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+	background-size: cover;
+	height:500px;
+	width:500px;
+	overflow: hidden;
+	-webkit-animation: bgImage 25s 1s infinite alternate;
+    -moz-animation: bgImage 25s 1s infinite alternate;
+    -ms-animation: bgImage 25s 1s infinite alternate;
+    -o-animation: bgImage 25s 1s infinite alternate;
+    animation: bgImage 25s 1s infinite alternate;
+}
+#search_box{
+	box-sizing:border-box;
+	width:300px;
+	height:200px;
+	background-color: rgba(20,100,200,0.1);
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:150px;
+	overflow:hidden;
+}
+#input1{
+	height:100px;
+  	width:300px;
+  	font-size:50px;
+  	font-family: 'Audiowide', cursive;
+  	background-color: rgba(20,100,200,0.6);
+  	border:none;
+  	margin-top: 40px;
+	/*margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(252,184,3,0.6);
+	border:1px solid rgba(252,184,3,0.6);
+	color:black;
+	display:block;
+	margin-top: 80px;*/
+}
+#submit_button{
+	display:block;
+	margin-left:auto;
+	margin-right: auto;
+	background-color: rgba(222,22,16,0.6);
+	border:1px solid rgba(222,22,16,0.6);
+	cursor:pointer;
+}
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+@media screen and (max-width: 535px){
+	::-webkit-input-placeholder {
+   color: rgba(252,184,3,0.6);
+   font-size:25px;
+   height:60px;
+}
+	#container{
+		height: 250px;
+		width: 250px;
+		margin-top:none;
+	}
+	#search_box{
+		height:100px;
+		width:150px;
+		margin-top:30px;
+	}
+	#input1{
+		height:60px;
+		font-size: 25px;
+		width:200px;
+		margin-top:20px;
+	}
+}
+@-webkit-keyframes bgImage {
+  	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/ok-computer.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/bruno.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/miles.jpg');
+        background-size: cover;
+    }
+  }
+@-moz-keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/ok-computer.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/bruno.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/miles.jpg');
+        background-size: cover;
+    }
+}
+@-ms-keyframes bgImage {
+    0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/ok-computer.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/bruno.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/miles.jpg');
+        background-size: cover;
+    }
+
+}
+@-o-keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+}
+@keyframes bgImage {
+	0%{
+        background: url('{{STATIC_URL}}img/FRANK-OCEAN-THINKING-ABOUT-YOU.jpg');
+        background-size: cover;
+    }
+    25%{
+        background: url('{{STATIC_URL}}img/ok-computer.jpg');
+        background-size: cover;
+    }
+    50%{
+        background: url('{{STATIC_URL}}img/808sbw.jpg');
+        background-size: cover;
+    }
+    75%{
+        background: url('{{STATIC_URL}}img/bruno.jpg');
+        background-size: cover;
+    }
+    100%{
+        background: url('{{STATIC_URL}}img/miles.jpg');
+        background-size: cover;
+    }
+}
+</style>
+<body>
+<header id="zara_header"> <span>Zara</span> <span>for</span> <span>Days</span></header>
+<section id="container">
+	<div id="search_box">
+		<form id="form1" action="/results/" method="get">
+			<input id="input1" type="text" placeholder="Search:" name="artistname"></input>
+			<!-- <input id="submit_button" type="submit" value="Search"></input>-->
+		</form>
+	</div>
+</section>
 </body>
 </html>

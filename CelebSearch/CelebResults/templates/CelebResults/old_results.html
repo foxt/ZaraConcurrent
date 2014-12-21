@@ -1,13 +1,10 @@
 <html>
 <head>
-    <title>Zara for Days</title>
-    <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+    <title>Tweets</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"/>
     <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css"></link>
-    <meta name="viewport" content="width=device-width">
-<!--    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link> -->
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
 
     <script>
     	var tweet_data = [];
@@ -64,17 +61,16 @@
         var options = {
           title: 'Aggregate Sentiment',
           titleTextStyle:{
-          	color: 'black',
-                fontName: 'Audiowide'
+          	color: 'white'
           },
           backgroundColor: 'transparent',
           legend:{textStyle: {
-          	color: 'black',
-          	fontName: 'Audiowide',
+          	color: 'white',
+          	fontName: 'Arial',
           	fontSize: '12'
           }},
           slices:{
-          	0: {color: '#71A1DD'},
+          	0: {color: 'black'},
           	1: {color: 'gray'},
           	2: {color: '#838F9B'}
           }
@@ -83,17 +79,16 @@
         var options2 = {
           title: 'Tweet Subjectivity',
           titleTextStyle:{
-          	color: 'black',
-                fontName: 'Audiowide'
+          	color: 'white'
           },
           backgroundColor: 'transparent',
           legend:{textStyle: {
-          	color: 'black',
-          	fontName: 'Audiowide',
+          	color: 'white',
+          	fontName: 'Arial',
           	fontSize: '12'
           }},
           slices:{
-          	0: {color: '#71A1DD'},
+          	0: {color: 'black'},
           	1: {color: 'gray'},
           	2: {color: '#838F9B'}
           }
@@ -127,83 +122,46 @@
       geomap.draw(data, options);
   };
   </script>
-  <style>
-  #zara_heading{
-        min-height:200px;
-  }
-  .center-text{
-	text-align:center;
-	font-family: 'Audiowide', cursive;
-  }
-  .result-area{
-        overflow:hidden;
-	min-height:500px;
-  }
-  #pie-charts{
-       background: rgba(200,200,200,0.6);
-  }
-  #map-container{
-       background-color: #EAF7FE;
-  }
-  #tweet-container{
-       background-color:#DDDDDD;
-	margin:none;
-  }
-  #piechart{
-       margin-top:40px;
-  }
-  #piechart2{
 
-  }
-  #map_canvas{
-  }
-  #google-visualization-geomap-0{
-      width:700px;
-      margin-left:auto;
-      margin-right:auto;
-  }
-   @media screen and (max-width: 690px){
-	#piechart{
-        }
-        #google-visualization-geomap-0{
-               
-        }
-        #map_canvas{
-		
-        }
-  }
-  </style>
 </head>
 <body>
-	<header id="zara_heading">
-		<p class="center-text">Zara for Days </p>
-		<h1 class="center-text">Tweet Results</h1>
-                <p class="center-text">This page displays the results for tweet sentiment analysis</p>
-                <p class="center-text">in the form of pie charts and maps.</p>
-	</header>
-	<section class="result-area" id="pie-charts">
-                <h2 class="center-text">Sentiment Pie Charts</h2>
-	    	<div id="piechart" ></div>
-    		<div id="piechart2"></div>
-	</section>
-        <section class="result-area" id="map-container">
-	        <h2 class="center-text">Tweet Sentiment Map</h2>
-                <div id='map_canvas'></div>
-        </section>
-        <section class="result-area" id="tweet-container">
-                <h2 class="center-text">Tweets</h2>
-	        <ol>
-                   {% for tweet in tweets %}
-                   <li>{{tweet.text}}</li>
-                   {% endfor %}
-               </ol>
-                <ol>
-                   {% for a,b in country_list %}
-                   <li>[{{a}}, {{b}}]</li>
-                   {% endfor %}
-               </ol>
-      </section>
+	<div id="banner">
+		<img id="zara_banner" src="{{STATIC_URL}}img/banner.png"></img>
+	</div>
+	<div id="pie_chart_container">
+		<img id="pie_title" src="{{STATIC_URL}}img/pie_title.png"></img>
+
+    	<div id="piechart" ></div>
+    	<div id="piechart2"></div>
+    	<img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
+    </div>
+    <ol>
+    {% for tweet in tweets %}
+      <li>{{tweet.text}}</li>
+    {% endfor %}
+    </ol>
+    <ol>
+   {% for a,b in country_list %}
+       <li>[{{a}}, {{b}}]</li>
+   {% endfor %}
+   </ol>
+=======
+  	<div id="piechart" ></div>
+  	<div id="piechart2"></div>
+    <img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
+  </div>
+  <div id="map_container">
+    <img id="tweet_map_title" src="{{STATIC_URL}}img/map.PNG"></img>
+    <div id='map_canvas'></div>
+  </div>
+
+   <!-- <div id="tcdiv"></div>
+    <div id="tcdiv2"></div> -->
 </body>
+
+
+
+
 
 
 
